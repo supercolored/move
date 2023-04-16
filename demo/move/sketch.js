@@ -69,7 +69,8 @@ function flockDemo() {
     const { x: fnx, y: fny } = move.flock(
       leader.x, leader.y,
       width / 2, height / 2,
-      frameCount / 100, params.FLOCK_SPACING * n + drift
+      frameCount / 100,
+      params.FLOCK_SPACING * n + drift
     );
 
     let birdColor = move.color.mapToRoygbiv(0, params.FLOCK_NUMBER - 1, n);
