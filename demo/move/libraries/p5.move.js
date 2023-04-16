@@ -51,11 +51,60 @@ const MOVE_EASING = {
   sexticIn: (t) => t * t * t * t * t * t,
   sexticOut: (t) => 1 - (1 - t) * (1 - t) * (1 - t) * (1 - t) * (1 - t) * (1 - t),
   sexticInOut: (t) => t < 0.5 ? 6 * t * t * t * t * t * t : 1 - Math.pow(-2 * t + 2, 6) / 2,
+};
+
+const _COLORS = [
+  {
+    name: 'roygbiv', 
+    colors: [
+      [ 255, 0, 0 ],   // Red
+      [ 255, 127, 0 ], // Orange
+      [ 255, 255, 0 ], // Yellow
+      [ 0, 255, 0 ],   // Green
+      [ 0, 0, 255 ],   // Blue
+      [ 75, 0, 130 ],  // Indigo
+      [ 148, 0, 211 ], // Violet
+    ]
+  }
+];
+
+/**
+ * @class Supercolor
+ * @classdesc SuperColor is a class that provides a simple way to manipulate colors.
+ * @note I am not sure if this is the best way to do this, but it works.
+ **/
+class SuperColor {
+  constructor() {
+    this.colors = _COLORS; 
+    this.generateColors();
+  }
+
+  generateColors = () => {
+    if(typeof color === 'undefined') {
+      throw new Error('SuperColor requires p5.js to be loaded.');
+    }
+
+    this.colors.forEach(spectrum => {
+      spectrum.colors = spectrum.colors.map(rgb => color(rgb[0], rgb[1], rgb[2]));
+    });
+  }
+
+  mapToRoygbiv = (start, end, progress) => {
+    const roygbiv = this.colors.find(spectrum => spectrum.name === 'roygbiv');
+    const position = map(progress, start, end, 0, roygbiv.colors.length - 1);
+    const leftNeighbor = int(position);
+    const rightNeighbor = min(leftNeighbor + 1, roygbiv.colors.length - 1);
+    const lerpAmt = position - leftNeighbor;
+
+    return lerpColor(roygbiv.colors[leftNeighbor], roygbiv.colors[rightNeighbor], lerpAmt);
+  }
+  rainbow = this.mapToRoygbiv; // alias
 }
 
 class Move {
   constructor() {
     this.pace = MOVE_EASING;
+    this.color = new SuperColor();
   }
 
   /** 
@@ -69,7 +118,7 @@ class Move {
    * move.between(0, 100, 0.75) // 75
    **/
   between = (start, end, progress) => start + (end - start) * progress;
-  btwn = this.between; // alias
+  btw = this.between; // alias
 
   backAndForth = (start, end, progress) => {
     const diff = end - start;
@@ -80,7 +129,7 @@ class Move {
       return end - diff * (t - 1);
     }
   };
-  baf = this.backAndForth; // alias
+  lol = this.backAndForth; // alias
 
   /**
    * @param {number} x - x coordinate
@@ -96,7 +145,7 @@ class Move {
    * move.around(0, 0, 0, 0, Math.PI * 2) // {x: 0, y: 0}
    * move.around(0, 0, 0, 0, Math.PI * 3) // {x: 0, y: 0}
    **/
-  around = (x, y, cx, cy, angle) => {
+  orbit = (x, y, cx, cy, angle) => {
     const s = Math.sin(angle);
     const c = Math.cos(angle);
     x -= cx;
@@ -108,7 +157,7 @@ class Move {
       y: ynew + cy
     };
   };
-  arnd = this.around; // alias
+  orb = this.orbit; // alias
 
   /**
    * @param {number} x - x coordinate
@@ -141,5 +190,3 @@ class Move {
     };
   };
 }
-
-export default Move;
