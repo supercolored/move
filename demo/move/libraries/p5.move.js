@@ -129,7 +129,7 @@ class Move {
       return end - diff * (t - 1);
     }
   };
-  lol = this.backAndForth; // alias
+  bob = this.backAndForth; // alias
 
   /**
    * @param {number} x - x coordinate
