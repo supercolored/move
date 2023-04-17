@@ -3,7 +3,10 @@
 `Move` is a library for p5.js that provides a simple way to move objects around the canvas.
 `SuperColor` is also available at `Move.color`, it's a class that provides a simple way to manipulate colors.
 
-The source lives [here](./demo/move/libraries/p5.move.js).
+_FYI, this is not structured sanely yet. So I should mention that..._
+### ..the main source file lives [here](./demo/move/libraries/p5.move.js).
+
+_...and the demo site is here: https://supercolored.github.io/move/_
 
 ## Note
 
