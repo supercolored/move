@@ -15,7 +15,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   move = new Move();
 
-  gui = createGui('p5.move.js demo').setPosition(50, windowHeight/2 -100);
+  gui = createGui('p5.move.js demo').setPosition(20, windowHeight/2 - 200);
   gui.addObject(params);
  }
 
