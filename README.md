@@ -5,6 +5,10 @@
 
 The source lives [here](./demo/move/libraries/p5.move.js).
 
+## Note
+
+This is very much a work in progress and a passion project. I'm taking liberties with my definition of `flock` and `orbit` but I'll either adjust the algorithms or give those methods more fitting names. Eventually I'll package this a little more sanely and properly submit to Processing, but for now, I'm just gonna obsessively tweak and add stuff that helps me with personal projects. 
+
 ## Usage
 
 ```javascript
