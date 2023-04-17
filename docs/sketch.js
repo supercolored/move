@@ -3,7 +3,7 @@ let params = {
   PARTICLES: 200,
   FLOCK_SPACING: 1,
   BOUNDING_OFFSET: 10,
-  DEMO: ['ORBIT', 'FLOCK']
+  DEMO: ['FLOCK', 'ORBIT']
 };
 let orbitParams = {
   CIRCLE_RADIUS: 25,
